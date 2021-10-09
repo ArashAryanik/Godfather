@@ -1,0 +1,153 @@
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+double sum(double, double, double);
+double sum2(double, double);
+double sum3(double, double, double, double);
+double GeneralTax(double);
+double ImportTax(double);
+double GITax(double);
+class NoTaxes {
+    public:
+        
+        double book, food1, food2,food3, medical,medical2; //  class for no taxes objects
+        double sum();
+        double GITax();
+};
+class Taxes {
+    public:
+        double imported, musicCD, perfume,perfume2,perfume3; //class for taxes
+        double sum();
+        double GeneralTax();
+        double ImportTax();
+        double GITax();
+
+};
+
+int main()
+{
+    double m,n;
+    NoTaxes obj1;
+    Taxes obj2;
+    cout << "[+]........................................Welcome..........................................................[+]\n\n";
+    cout << "[*] Book prices\n";
+    cin >> obj1.book;
+    
+    cout << "[*] music CD prices\n";
+    cin >> obj2.musicCD;
+    cout << "[*] choclate bar prices\n";
+    cin >> obj1.food1;
+    n = GeneralTax(obj2.musicCD);
+ 
+    double n2 = n + obj2.musicCD;
+    cout << ">book: " <<  obj1.book <<"\n" << ">musicCD :" << n2 <<"\n" << ">chocolate bar : " << obj1.food1<<"\n";
+    cout << "[>] Sales Taxes:" << n;
+    m = sum(obj1.book, n2, obj1.food1); //n2  is defined for obj2.musicCD after calculate tax
+    cout << "\n[>] Total:\t" << m;
+
+
+   // Input 2 /////////////////////////////////////////////////////////////////////////////////////
+               ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+    cout <<"\n\n\n" << "[*] imported bottle of chocolate at:\n";
+    cin >> obj1.food2;                    // enter the cost of chocolate
+    int k = ImportTax(obj1.food2);        // calculate  tax only (0.05)
+    double k2 = k + obj1.food2;           //calculate  price + tax(0.05)
+    cout << "[*] imported bottle of perfume at :\n";
+    cin >> obj2.perfume;          // enter the cost of perfume 
+    int l = GITax(obj2.perfume);   //caculate tax only(0.10 + 0.05 = 0.15)
+    double l2 = l + obj2.perfume;   //caculate price + tax (0.15)
+
+
+    double o1 = sum2(l, k);        // calculate sales tax
+    double o2 = sum2(l2, k2);      // calculate total perfume + chocolate
+    cout << ">imported   box   of   chocolate:" << k2 << "\n" << ">imported bottle of perfume:" << "\n" << l2;
+    cout << "\n[>] Sales Taxes:" << o1;
+    cout << "\n[>] Total:\t" << o2;
+
+    // Input 3 /////////////////////////////////////////////////////////////////////////////////////
+               ///////////////////////////////////////////////////////////////////////////////////
+
+    cout <<"\n\n\n" << "[*] imported bottle of perfume at : \n";
+    cin >> obj2.perfume2;                    // enter the cost of chocolate
+    double x = GITax(obj2.perfume2);        // calculate  tax only (0.15)
+    double x2 = x+ obj2.perfume2;           //calculate  price + tax(0.15)
+
+    cout << "[*] bottle of perfume at :\n";
+    cin >> obj2.perfume3;          // enter the cost of perfume 
+    double y = GeneralTax(obj2.perfume3);   //caculate tax only(0.10)
+    double y2 = y + obj2.perfume3;   //caculate price + tax (0.10)
+
+    cout << "[*] packet   of   headache   pills:\n";
+    cin >> obj1.medical2;          // enter the cost of perfume 
+    double w = obj1.medical2;
+
+    cout << "[*] imported   box   of   chocolates:\n";
+    cin >> obj1.food3;
+    double z = ImportTax(obj1.food3);   //calculate tax (0.05)
+    double z2 = z + obj1.food3;        //calculate price + tax
+
+    double o3 = sum(x , y, z);        // calculate sales tax
+    double o4 = sum3(x2, y2, z2, w);      // calculate total
+    cout << ">imported   bottle of perfume:" << x2 << "\n" << ">bottle of perfume:" << y2 << "\n" << ">packet of headache pills" << w << "\n" << ">imported box of chocolates" << z2;
+    cout << "\n\n[>] Sales Taxes:" << o3;
+    cout << "\n[>] Total:\t" << o4;
+
+    
+
+
+}
+
+
+
+
+
+double sum(double a, double b, double c)
+{
+
+    double total;
+    total = a + b + c;
+    return total;
+}
+double sum2(double SumX2, double SumY2) {
+    double sum2;
+    sum2 = SumX2 + SumY2;
+    return sum2;
+                                      }
+double sum3(double sumx3, double sumy3, double sumz3, double sumw3) {
+    double sum3;
+    sum3 = sumx3 + sumy3 + sumz3 + sumw3;
+    return sum3;
+}
+
+
+double GeneralTax(double General) {
+    
+    double tax1;
+    tax1 = General * 0.1;
+    //cout << "The amout of tax\n";
+    return tax1;
+    //cout << "Total price\n";
+    return tax1 + General;
+                            }
+double ImportTax(double Import) {
+    double tax2;
+    tax2 =Import * 0.05;
+    
+    //cout << "The amout of imported tax\n";
+    return tax2;
+    //cout << "Total price\n";
+    return tax2 + Import;
+                          }
+double GITax(double GI) { // (general + imported) tax
+    double tax3;
+    tax3= GI * 0.15;
+
+    //cout << "The amout of imported tax\n";
+    return tax3;
+    //cout << "Total price\n";
+    return tax3 + GI;
+}
